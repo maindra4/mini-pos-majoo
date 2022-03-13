@@ -20,11 +20,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', 'ProductController@index');
     Route::get('/add', 'ProductController@addView');
     Route::get('/get_data', 'ProductController@getDataProduct');
+    Route::get('/get_transaction/{id}', 'ProductController@getDataTransaction');
+    Route::get('/get_stock_diary/{id}', 'ProductController@getDataStockDiary');
     Route::get('/{id}', 'ProductController@detail');
     Route::get('/update/{id}', 'ProductController@updateView');
     Route::get('/delete/{id}', 'ProductController@delete');
     Route::post('/add', 'ProductController@add');
     Route::post('/update/{id}', 'ProductController@update');
+  });
+
+  Route::prefix('/category')->group(function () {
+    Route::get('/', 'CategoryController@index');
+    Route::get('/add', 'CategoryController@addView');
+    Route::get('/get_data', 'CategoryController@getDataCategory');
+    Route::get('/update/{id}', 'CategoryController@updateView');
+    Route::get('/delete/{id}', 'CategoryController@delete');
+    Route::post('/add', 'CategoryController@add');
+    Route::post('/update/{id}', 'CategoryController@update');
   });
 
   Route::prefix('/user')->group(function () {

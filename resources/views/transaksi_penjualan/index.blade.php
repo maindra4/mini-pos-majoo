@@ -52,7 +52,6 @@
 		$(document).ready(function() {
 			let trx_table = $('.trx-table').DataTable({
 				processing: true,
-				serverSide: true,
 				ajax: "transaksi_penjualan/get_data",
 				columns: [
 					{ data: "name" },

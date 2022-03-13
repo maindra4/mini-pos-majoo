@@ -62,7 +62,6 @@
 		$(document).ready(function() {
 			let product_table = $('.product-table').DataTable({
 				processing: true,
-				serverSide: true,
 				ajax: "product/get_data",
 				columns: [
 					{ data: "name" },
@@ -99,7 +98,10 @@
 							);
 						}
 					}
-				]
+				],
+				search: {
+					return: true
+				}
 			})
 
 			$('.product-table tbody').on('click', '.delete-record', function () {

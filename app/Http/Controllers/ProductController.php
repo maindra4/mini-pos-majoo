@@ -137,4 +137,12 @@ class ProductController extends Controller
 	public function getDataProduct() {
 		return Product::getDataProduct();
 	}
+
+	public function getDataTransaction($id) {
+		return Product::getDataTransaction($id);
+	}
+
+	public function getDataStockDiary($id) {
+		return Product::getDataStockDiary($id);
+	}
 }

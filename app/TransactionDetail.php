@@ -13,4 +13,8 @@ class TransactionDetail extends Model
 	protected $guarded = [];
 	public $incrementing = true;
 	public $timestamps = true;
+
+	public function transaction() {
+		return $this->belongsTo('App\Transaction', 'transaction_id');
+	}
 }

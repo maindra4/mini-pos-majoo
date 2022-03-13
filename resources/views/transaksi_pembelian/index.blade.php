@@ -52,7 +52,6 @@
 		$(document).ready(function() {
 			let trx_table = $('.trx-table').DataTable({
 				processing: true,
-				serverSide: true,
 				ajax: "transaksi_pembelian/get_data",
 				columns: [
 					{ data: "supplier" },

@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StockOrder extends Model
 {
-    use SoftDeletes;
-    
-    protected $table = 'stock_order';
-    protected $guarded = [];
-    public $incrementing = true;
-    public $timestamps = true;
+	use SoftDeletes;
+	
+	protected $table = 'stock_order';
+	protected $guarded = [];
+	public $incrementing = true;
+	public $timestamps = true;
 
-    public function detail() {
+	public function detail() {
 		return $this->hasMany('App\StockOrderDetail', 'stock_order_id');
 	}
 
@@ -22,7 +22,7 @@ class StockOrder extends Model
 		return $this->belongsTo('App\Supplier', 'supplier_id');
 	}
 
-    static function getDataStockOrder() {
+	static function getDataStockOrder() {
 		$trx = StockOrder::with(['detail', 'supplier'])->get();
 		
 		$result = [];

@@ -60,7 +60,6 @@
 		$(document).ready(function() {
 			let user_table = $('.user-table').DataTable({
 				processing: true,
-				serverSide: true,
 				ajax: "user/get_data",
 				columns: [
 					{ data: "name" },

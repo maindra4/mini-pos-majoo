@@ -28,10 +28,11 @@
               <div class="row">
                 <div class="col-12 col-md-3 d-flex align-items-center justify-content-center mb-2 mb-md-0">
                   <div class="d-flex align-items-center justify-content-center">
-                      <img src="{{ url('storage/'.$product->product_image) }}" class="img-fluid product-img" alt="product image">
+                    <img src="{{ url('storage/'.$product->product_image) }}" class="img-fluid product-img" alt="product image">
                   </div>
                 </div>
                 <div class="col-12 col-md-9">
+                  <input type="hidden" id="product_id" value="{{ $product->id }}">
                   <h4>{{ $product->product_name }}</h4>
                   <div class="d-flex flex-wrap mt-1">
                     <p class="item-price me-1">Rp. {{ number_format($product->price_sell) }}</p>
@@ -51,7 +52,75 @@
             </div>
           </div>
         </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Histori Penjualan</h4>
+            </div>
+            <div class="card-body">
+              <table class="history-table table">
+                <thead>
+                  <tr>
+                    <th>Transaction Date</th>
+                    <th>Customer</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Stock Diary</h4>
+            </div>
+            <div class="card-body">
+              <table class="history-stock-table table">
+                <thead>
+                  <tr>
+                    <th>Transaction Date</th>
+                    <th>Supplier</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+@endsection
+
+@section('additional_jquery')
+	<script>
+		$(document).ready(function() {
+			let history_table = $('.history-table').DataTable({
+				processing: true,
+				ajax: `/product/get_transaction/${$("#product_id").val()}`,
+				columns: [
+					{ data: "date" },
+					{ data: "customer_name" },
+					{ data: "quantity" },
+					{ data: "total" },
+				],
+			})
+
+			let history_stock_table = $('.history-stock-table').DataTable({
+				processing: true,
+				ajax: `/product/get_stock_diary/${$("#product_id").val()}`,
+				columns: [
+					{ data: "date" },
+					{ data: "supplier_name" },
+					{ data: "quantity" },
+					{ data: "total" },
+				],
+			})
+		});
+	</script>
 @endsection

@@ -6,11 +6,11 @@
     <div class="content-header-left col-md-9 col-12 mb-2">
       <div class="row breadcrumbs-top">
         <div class="col-12">
-          <h2 class="content-header-title float-start mb-0">Supplier</h2>
+          <h2 class="content-header-title float-start mb-0">Category</h2>
           <div class="breadcrumb-wrapper">
             <ol class="breadcrumb">
               <li class="breadcrumb-item active">
-                Supplier
+                Category
               </li>
             </ol>
           </div>
@@ -24,7 +24,7 @@
         <section id="product">
 					<div class="row">
 						<div class="col-12">
-              <a href="/supplier/add" class="btn btn-primary mb-1">Add Supplier</a>
+              <a href="/category/add" class="btn btn-primary mb-1">Add Category</a>
 
               @if(session()->has('success'))
                 <div class="alert alert-success mb-1" role="alert">
@@ -34,12 +34,10 @@
               @endif
 
 							<div class="card px-2 py-2">
-								<table class="supplier-table table">
+								<table class="category-table table">
 									<thead>
 										<tr>
                       <th>Nama</th>
-                      <th>Alamat</th>
-                      <th>Created At</th>
                       <th>Action</th>
                     </tr>
 									</thead>
@@ -58,13 +56,11 @@
 @section('additional_jquery')
 	<script>
 		$(document).ready(function() {
-			let supplier_table = $('.supplier-table').DataTable({
+			let category_table = $('.category-table').DataTable({
 				processing: true,
-				ajax: "supplier/get_data",
+				ajax: "category/get_data",
 				columns: [
-					{ data: "name" },
-					{ data: "address" },
-					{ data: "created_at" },
+					{ data: "category_name" },
 					{ data: "id" }
 				],
 				columnDefs: [
@@ -80,7 +76,7 @@
 										feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
 									'</a>' +
 									'<div class="dropdown-menu dropdown-menu-end">' +
-										`<a href="/supplier/update/${data}" class="dropdown-item">` +
+										`<a href="/category/update/${data}" class="dropdown-item">` +
 											feather.icons['edit'].toSvg({ class: 'me-50 font-small-4' }) +
 										'Update</a>' +
 										`<a class="dropdown-item delete-record" data-id="${data}">` +
@@ -91,15 +87,18 @@
 							);
 						}
 					}
-				]
+				],
+				search: {
+					return: true
+				}
 			})
 
-			$('.supplier-table tbody').on('click', '.delete-record', function () {
+			$('.category-table tbody').on('click', '.delete-record', function () {
 				let id = $(this).data("id")
 
 				Swal.fire({
-					title: 'Delete supplier?',
-					text: "Are you sure to delete this supplier?",
+					title: 'Delete category?',
+					text: "Are you sure to delete this category?",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonText: 'Yes, delete it!',
@@ -111,7 +110,7 @@
 				}).then(function (result) {
 					if (result.value) {
 						$.ajax({
-							url: `supplier/delete/${id}`,
+							url: `category/delete/${id}`,
 							dataType: 'json',
 							success: function(callback) {
 								if(callback.status) {
@@ -139,7 +138,6 @@
 								}
 							}
 						})
-						
 					}
 				});
 			});

@@ -18,6 +18,14 @@ class Product extends Model
 		return $this->belongsTo('App\Category', 'category_id');
 	}
 
+	public function transaction() {
+		return $this->hasMany('App\TransactionDetail', 'product_id');
+	}
+
+	public function stock_order() {
+		return $this->hasMany('App\StockOrderDetail', 'product_id');
+	}
+
 	static function getDataProduct($id = null) {
 		if($id == null) {
 			$product = Product::with(['category'])->get();
@@ -45,6 +53,56 @@ class Product extends Model
 		} else {
 			$result = Product::with(['category'])->find($id);
 		}
+
+		return $result;
+	}
+
+	static function getDataTransaction($id) {
+		$product = Product::with(['transaction.transaction.customer'])->find($id);
+
+		$result = [];
+		$result['data'] = [];
+		foreach($product->transaction as $row) {
+			$customer = $row->transaction->customer;
+
+			$item = [
+				"date" => date("d F Y", strtotime($row->transaction->transaction_date)),
+				"customer_name" => $customer->customer_name,
+				"quantity" => $row->quantity,
+				"total" => "Rp. ".number_format($row->subtotal)
+			];
+
+			array_push($result['data'], $item);
+		}
+
+		$result['draw'] = 1;
+		$result['recordsTotal'] = count($product->transaction);
+		$result['recordsFiltered'] = count($product->transaction);
+
+		return $result;
+	}
+
+	static function getDataStockDiary($id) {
+		$product = Product::with(['stock_order.stock_order.supplier'])->find($id);
+
+		$result = [];
+		$result['data'] = [];
+		foreach($product->stock_order as $row) {
+			$supplier = $row->stock_order->supplier;
+
+			$item = [
+				"date" => date("d F Y", strtotime($row->stock_order->stock_order_date)),
+				"supplier_name" => $supplier->supplier_name,
+				"quantity" => $row->quantity,
+				"total" => "Rp. ".number_format($row->subtotal)
+			];
+
+			array_push($result['data'], $item);
+		}
+
+		$result['draw'] = 1;
+		$result['recordsTotal'] = count($product->stock_order);
+		$result['recordsFiltered'] = count($product->stock_order);
 
 		return $result;
 	}

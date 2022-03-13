@@ -58,7 +58,6 @@
 		$(document).ready(function() {
 			let pelanggan_table = $('.pelanggan-table').DataTable({
 				processing: true,
-				serverSide: true,
 				ajax: "pelanggan/get_data",
 				columns: [
 					{ data: "name" },

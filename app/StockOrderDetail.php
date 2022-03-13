@@ -13,4 +13,8 @@ class StockOrderDetail extends Model
     protected $guarded = [];
     public $incrementing = true;
     public $timestamps = true;
+
+	public function stock_order() {
+		return $this->belongsTo('App\StockOrder', 'stock_order_id');
+	}
 }

@@ -162,6 +162,12 @@
 						<span class="menu-title text-truncate" data-i18n="Email">Master Produk</span>
 					</a>
 				</li>
+				<li class="{{ ($active_menu == 'category') ? 'active' : '' }} nav-item">
+					<a class="d-flex align-items-center" href="/category">
+						<i data-feather='list'></i>
+						<span class="menu-title text-truncate" data-i18n="Email">Master Category</span>
+					</a>
+				</li>
 				<li class="{{ ($active_menu == 'user') ? 'active' : '' }} nav-item">
 					<a class="d-flex align-items-center" href="/user">
 						<i data-feather='users'></i>
