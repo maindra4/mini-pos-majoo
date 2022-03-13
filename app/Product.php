@@ -32,7 +32,8 @@ class Product extends Model
 					"description" => $row->description,
 					"price_sell" => "Rp. ".number_format($row->price_sell),
 					"price_buy" => "Rp. ".number_format($row->price_buy),
-					"stock" => $row->stock
+					"stock" => $row->stock,
+					"image" => url('storage/'.$row->product_image)
 				];
 
 				array_push($result['data'], $item);

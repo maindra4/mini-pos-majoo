@@ -71,19 +71,6 @@
 				</ul>
 			</div>
 			<ul class="nav navbar-nav align-items-center ms-auto">
-				{{-- <li class="nav-item d-none d-lg-block">
-					<a class="nav-link nav-link-style">
-						<i class="ficon" data-feather="moon"></i>
-					</a>
-				</li>
-				<li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
-					<div class="search-input">
-						<div class="search-input-icon"><i data-feather="search"></i></div>
-						<input class="form-control input" type="text" placeholder="Explore Vuexy..." tabindex="-1" data-search="search">
-						<div class="search-input-close"><i data-feather="x"></i></div>
-						<ul class="search-list search-list-main"></ul>
-					</div>
-				</li> --}}
 				<li class="nav-item dropdown dropdown-user">
 					<a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<div class="user-nav d-sm-flex d-none">
@@ -91,11 +78,14 @@
 							<span class="user-status">Admin</span>
 						</div>
 						<span class="avatar">
-							<img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40">
+							<img class="round" src="{{ asset('app-assets/images/portrait/small/avatar-s-11.jpg') }}" alt="avatar" height="40" width="40">
 							<span class="avatar-status-online"></span>
 						</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
+						<a class="dropdown-item" href="/">
+							<i class="me-50" data-feather="home"></i> Front Page
+						</a>
 						<form action="/logout" method="POST">
 							@csrf
 							<button class="dropdown-item btn-block" type="submit" style="width: 100%">
@@ -161,7 +151,7 @@
 		<div class="main-menu-content">
 			<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 				<li class="{{ ($active_menu == 'dashboard') ? 'active' : '' }} nav-item">
-					<a class="d-flex align-items-center" href="/">
+					<a class="d-flex align-items-center" href="/dashboard">
 						<i data-feather="home"></i>
 						<span class="menu-title text-truncate" data-i18n="Email">Dashboard</span>
 					</a>

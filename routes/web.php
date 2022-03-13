@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'])->group(function () {
-  Route::get('/', 'DashboardController@index');
+  Route::get('/dashboard', 'DashboardController@index');
 
   Route::prefix('/product')->group(function () {
     Route::get('/', 'ProductController@index');
@@ -54,8 +54,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/delete/{id}', 'PelangganController@delete');
   });
   
+  Route::prefix('/transaksi_pembelian')->group(function () {
+    Route::get('/', 'TransaksiPembelianController@index');
+  });
+
   Route::post('/logout', 'LoginController@logout');
 });
 
 Route::get('/login', 'LoginController@index')->name('login')->middleware('guest');
 Route::post('/login', 'LoginController@authenticate');
+
+Route::get('/', 'FrontpageController@index');
+
+Route::prefix('/checkout')->group(function () {
+  Route::get('/{id}', 'FrontpageController@checkout');
+  Route::post('/process', 'FrontpageController@checkoutProcess');
+});

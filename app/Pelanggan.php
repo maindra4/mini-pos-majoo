@@ -24,7 +24,7 @@ class Pelanggan extends Model
 				$item = [
 					"id" => $row->id,
 					"name" => $row->customer_name,
-					"phone" => $row->customer_phone,
+					"no_hp" => $row->customer_phone,
 					"address" => $row->customer_address,
 				];
 
