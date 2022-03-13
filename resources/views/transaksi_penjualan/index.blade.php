@@ -28,9 +28,9 @@
 								<table class="trx-table table">
 									<thead>
 										<tr>
-                      <th>Supplier</th>
+                      <th>Nama</th>
                       <th>Tanggal</th>
-                      <th>Total Pembelian</th>
+                      <th>Total Penjualan</th>
                       <th>Total Item</th>
                       <th>Status</th>
                     </tr>
@@ -53,11 +53,11 @@
 			let trx_table = $('.trx-table').DataTable({
 				processing: true,
 				serverSide: true,
-				ajax: "transaksi_pembelian/get_data",
+				ajax: "transaksi_penjualan/get_data",
 				columns: [
-					{ data: "supplier" },
+					{ data: "name" },
 					{ data: "date" },
-					{ data: "total_buying" },
+					{ data: "total_selling" },
 					{ data: "total_item" },
 					{ data: "status" }
 				],

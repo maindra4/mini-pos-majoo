@@ -54,8 +54,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/delete/{id}', 'PelangganController@delete');
   });
   
+  Route::prefix('/transaksi_penjualan')->group(function () {
+    Route::get('/', 'TransaksiPenjualanController@index');
+    Route::get('/get_data', 'TransaksiPenjualanController@get_data');
+  });
+  
   Route::prefix('/transaksi_pembelian')->group(function () {
     Route::get('/', 'TransaksiPembelianController@index');
+    Route::get('/get_data', 'TransaksiPembelianController@get_data');
   });
 
   Route::post('/logout', 'LoginController@logout');
